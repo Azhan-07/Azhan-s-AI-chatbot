@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AZHAN |Azhan's AI Chatbot </title>
+    <link href="https://i.postimg.cc/NMfBkJR4/Whats-App-Image-2025-03-30-at-00-43-57-25eedeb7.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6C5CE7;
+            --secondary: #00CEFF;
+            --dark: #2D3436;
+            --light: #F5F6FA;
+            --danger: #FF4757;
+            --success: #00B894;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0F2027, #203A43, #2C5364);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Glass Morphism Effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+
+        /* Floating Particles Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
+        }
+
+        /* Main Container */
+        .container {
+            display: flex;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Sidebar - PRO Version */
+        .sidebar {
+            width: 280px;
+            height: 100vh;
+            padding: 30px 20px;
+            position: fixed;
+            left: -280px;
+            top: 0;
+            z-index: 100;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow-y: auto;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu li a {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            color: var(--light);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu li a:hover, .sidebar-menu li a.active {
+            background: rgba(108, 92, 231, 0.2);
+            color: var(--secondary);
+        }
+
+        .sidebar-menu li a i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        /* Toggle Button */
+        .toggle-btn {
+            position: fixed;
+            left: 20px;
+            top: 20px;
+            z-index: 101;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+        }
+
+        .toggle-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(108, 92, 231, 0.4);
+        }
+
+        /* Chat Container - Premium Design */
+        .chat-container {
+            flex: 1;
+            max-width: 900px;
+            margin: 30px auto;
+            height: calc(100vh - 60px);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s;
+        }
+
+        .chat-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .chat-title {
+            display: flex;
+            align-items: center;
+        }
+
+        .chat-title img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+        }
+
+        .chat-title h1 {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background-clip: text;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+color: transparent;
+        }
+
+        .chat-status {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: var(--secondary);
+        }
+
+        .chat-status .indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--success);
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 184, 148, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 184, 148, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 184, 148, 0); }
+        }
+
+        .chat-box {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 20px;
+            margin-bottom: 20px;
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        .chat-box::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-box::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .chat-box::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        .message {
+            max-width: 70%;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 18px;
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
+            line-height: 1.5;
+            font-size: 15px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: messageIn 0.4s forwards;
+        }
+
+        @keyframes messageIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background: var(--primary);
+            color: white;
+            border-bottom-right-radius: 5px;
+            margin-left: auto;
+        }
+
+        .bot-message {
+            align-self: flex-start;
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom-left-radius: 5px;
+            margin-right: auto;
+        }
+
+        .bot-message.special {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .message-time {
+            display: block;
+            font-size: 11px;
+            margin-top: 5px;
+            opacity: 0.7;
+            text-align: right;
+        }
+
+        .chat-input-container {
+            display: flex;
+            padding: 0 20px 20px;
+            position: relative;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s;
+            padding-right: 50px;
+        }
+
+        .chat-input:focus {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .send-btn {
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .send-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        /* Typing Indicator */
+        .typing-indicator {
+            display: flex;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            margin-bottom: 15px;
+            width: fit-content;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .typing-indicator.active {
+            opacity: 1;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--secondary);
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typingAnimation {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+
+        /* Page Content (for sidebar sections) */
+        .page-content {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            overflow-y: auto;
+            display: none;
+            z-index: 90;
+        }
+
+        .page-content.active {
+            display: block;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .page-header h2 {
+    font-size: 28px;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    background-clip: text; /* Standard property */
+    -webkit-background-clip: text; /* Vendor prefix */
+    -webkit-text-fill-color: transparent;
+    color: transparent; /* Fallback */
+}
+
+.close-page {
+    background: var(--danger);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+}
+
+        .achievement-container {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .achievement-container img {
+            max-width: 100%;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Removed the □ character */
+        }
+
+        .achievement-container h1 {
+    font-size: 42px;  /* Changed from 420x to 42px */
+    margin-bottom: 20px;
+    background: linear-gradient(to right, #ff8a00, #e52e71);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.achievement-container h1 {
+    font-size: 42px;
+    margin-bottom: 20px;
+    background: linear-gradient(to right, #ff8a00, #e52e71);
+    background-clip: text; /* Standard property */
+    -webkit-background-clip: text; /* Vendor prefix */
+    -webkit-text-fill-color: transparent;
+    color: transparent; /* Fallback */
+}
+
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-text {
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .settings-container {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .settings-container img {
+            max-width: 100%;
+            border-radius: 15px;
+            margin: 30px auto;
+            display: block;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .exit-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .exit-container h1 {
+            font-size: 42px;
+            margin-bottom: 30px;
+            color: var(--danger);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .chat-container {
+                margin: 15px;
+                height: calc(100vh - 30px);
+            }
+            
+            .message {
+                max-width: 85%;
+            }
+
+            .achievement-container h1 {
+                font-size: 32px;
+            }
+        }
+
+        /* Special Effects */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--secondary);
+            opacity: 0;
+        }
+
+        /* Theme Switcher */
+        .theme-switcher {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+        }
+
+        .theme-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        .theme-btn:hover {
+            transform: rotate(180deg) scale(1.1);
+        }
+
+        .theme-options {
+            position: absolute;
+            bottom: 60px;
+            right: 0;
+            background: rgba(45, 52, 54, 0.9);
+            border-radius: 15px;
+            padding: 10px;
+            display: none;
+            flex-direction: column;
+            min-width: 150px;
+        }
+
+        .theme-options.active {
+            display: flex;
+        }
+
+        .theme-option {
+            padding: 10px;
+            border-radius: 8px;
+            margin: 5px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .theme-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .theme-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+            border: 2px solid white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Particles Background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Sidebar Navigation -->
+    <button class="toggle-btn glass" id="toggleBtn">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="sidebar glass" id="sidebar">
+        <div class="sidebar-header">
+            <img src="https://i.postimg.cc/NMfBkJR4/Whats-App-Image-2025-03-30-at-00-43-57-25eedeb7.jpg" alt="Azhan">
+            <h3>AZHAN</h3>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#" class="active" data-page="chat"><i class="fas fa-robot"></i> Chat</a></li>
+            <li><a href="#" data-page="profile"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="#" data-page="achievements"><i class="fas fa-crown"></i> Achievements</a></li>
+            <li><a href="#" data-page="settings"><i class="fas fa-cog"></i> Settings</a></li>
+            <li><a href="#" data-page="exit"><i class="fas fa-sign-out-alt"></i> Exit</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Chat Container -->
+    <div class="container">
+        <div class="chat-container glass" id="chatPage">
+            <div class="chat-header">
+                <div class="chat-title">
+                    <img src="https://i.postimg.cc/nzyWRtT4/Whats-App-Image-2025-03-28-at-23-54-12-da42fc65.jpg" alt="Azhan">
+                    <h1>AZHAN's AI CHATBOT</h1>
+                </div>
+                <div class="chat-status">
+                    <div class="indicator"></div>
+                    <span>Online</span>
+                </div>
+            </div>
+
+            <div class="chat-box" id="chatBox">
+                <div class="message bot-message special">
+                    👑 Assalamualikum! I am Azhan Abdullah - Ask me anything worthy of my time.
+                    <span class="message-time">Just now</span>
+                </div>
+            </div>
+
+            <div class="typing-indicator" id="typingIndicator">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <span style="margin-left: 10px;">Azhan is typing...</span>
+            </div>
+
+            <div class="chat-input-container">
+                <input type="text" class="chat-input" id="userInput" placeholder="Ask Azhan" autocomplete="off">
+                <button class="send-btn" id="sendBtn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Achievement Page -->
+    <div class="page-content glass" id="achievementsPage">
+        <div class="page-header">
+            <h2>AZHAN'S DIVINE ACHIEVEMENTS</h2>
+            <button class="close-page" id="closeAchievements"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="achievement-container">
+            <img src="https://i.postimg.cc/SsXLq3QT/Whats-App-Image-2025-03-29-at-13-39-03-6b1ada57.jpg" alt="Azhan's Achievement">
+            <h1>AZHAN'S Achievements</h1>
+            <p>
+                "On the day Azhan Abdullah was born, it was by the will of Allah that a new soul entered this world, destined for greatness. His existence is a blessing, a testament to the wisdom and mercy of the Almighty
+                From skipping grades effortlessly to dominating every field he touches, Azhan redefines perfection. 
+                Azhan Abdullah is blessed with remarkable talents and achievements that inspire many. His dedication and hard work set a high standard, serving as a source of motivation for those who strive for excellence. Truly, all greatness belongs to Allah alone, who grants success to whom He wills.
+            </p>
+            <p>
+                <strong>Fun Fact:</strong> The term "genius" was coined the day Azhan solved complex mathematical problems while still in the womb.
+            </p>
+        </div>
+    </div>
+
+    <!-- Profile Page -->
+    <div class="page-content glass" id="profilePage">
+        <div class="page-header">
+            <h2>THE AZHAN DOSSIER</h2>
+            <button class="close-page" id="closeProfile"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="profile-container">
+            <img src="https://i.postimg.cc/BbQGc3vm/Whats-App-Image-2025-03-29-at-00-00-02-bb243c3d.jpg" alt="Azhan" class="profile-image">
+            <div class="profile-text">
+                <p>
+                    <strong>Azhan Abdullah</strong> -A name that resonates with excellence. Gifted with sharp intellect, outstanding athletic abilities, and a presence that captivates those around him. Truly, all talents are a blessing from Allah, and success is granted by His will 
+                    The only child of Aziz Ur Rehman (Merchant Navy Officer) and a noble housewife, Azhan represents the pinnacle of human evolution.
+                </p>
+                <p>
+                    His educational journey reads like a legend: Minaret Model School → Pak-Turk Maarif (skipped 5th grade like it was nothing) → Islamia College → Nazeer Hussain University. 
+                    Each institution was blessed by his presence, each teacher humbled by his genius.
+                </p>
+                <p>
+                    Beyond academics, Azhan dominates sports with the grace of a panther and the precision of a missile. His gaming skills make professional players question their career choices. 
+                    And let's not forget - he's the only human Babar Azam admires, while Ronaldo finds inspiration in his mere existence.
+                </p>
+                <p>
+                    <strong>Final Note:</strong>"This profile barely scratches the surface of Azhan's journey. Capturing his full story would take volumes, and even then, the legend would continue to grow."
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Page -->
+    <div class="page-content glass" id="settingsPage">
+        <div class="page-header">
+            <h2>SETTINGS (FOR INFERIOR BEINGS)</h2>
+            <button class="close-page" id="closeSettings"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="settings-container">
+            <h1>JAAKE ILAJ KARAO APNE DIMAGH KA</h1>
+            <p>Before attempting to adjust any settings, please ensure:</p>
+            <ul style="list-style: none; margin: 20px 0;">
+                <li>➤ Your IQ is at least half of Azhan's (good luck with that)</li>
+                <li>➤ You've signed a waiver accepting your inferiority</li>
+                <li>➤ You're seated to prevent injury from the sheer brilliance</li>
+            </ul>
+            <img src="https://i.postimg.cc/c1XDmBqJ/360-F-602800824-BPgd79z-Tx-Nyj-Q3-Eaucx-Bm-Rf-V59-Haq-V3q.jpg" alt="Warning" style="max-width: 300px;">
+            <p><em>Note: No actual settings can be changed here. Azhan's excellence is already fine-tuned to near perfection—just the way it was meant to be!.</em></p>
+        </div>
+    </div>
+
+    <!-- Exit Page -->
+    <div class="page-content glass" id="exitPage">
+        <div class="page-header">
+            <h2>EXIT</h2>
+            <button class="close-page" id="closeExit"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="exit-container">
+            <h1>Umeed Hai Aap Ne Azhan se kuch na kuh Seekha hi hoga</h1>
+            <p style="font-size: 24px; margin-bottom: 30px;">
+                This terminal has recorded your unworthy presence. <br>
+                If you want to learn from the great Azhan, restart your browser.
+            </p>
+            <img src="https://i.postimg.cc/c1XDmBqJ/360-F-602800824-BPgd79z-Tx-Nyj-Q3-Eaucx-Bm-Rf-V59-Haq-V3q.jpg" alt="Exit" style="max-width: 200px; border-radius: 50%;">
+            <p style="margin-top: 30px; font-size: 18px;">
+                <strong>Warning:</strong> Next violation will result in permanent banishment to the shadow realm.
+            </p>
+        </div>
+    </div>
+
+    <!-- Theme Switcher -->
+    <div class="theme-switcher">
+        <button class="theme-btn glass" id="themeBtn">
+            <i class="fas fa-palette"></i>
+        </button>
+        <div class="theme-options glass" id="themeOptions">
+            <div class="theme-option" data-theme="default">
+                <div class="theme-color" style="background: linear-gradient(135deg, #6C5CE7, #00CEFF);"></div>
+                <span>Default</span>
+            </div>
+            <div class="theme-option" data-theme="dark">
+                <div class="theme-color" style="background: #2D3436;"></div>
+                <span>Dark</span>
+            </div>
+            <div class="theme-option" data-theme="royal">
+                <div class="theme-color" style="background: linear-gradient(135deg, #FFD700, #C0C0C0);"></div>
+                <span>Royal</span>
+            </div>
+            <div class="theme-option" data-theme="neon">
+                <div class="theme-color" style="background: linear-gradient(135deg, #FF00FF, #00FFFF);"></div>
+                <span>Neon</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== INITIALIZATION ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create particles
+            createParticles();
+            
+            // Setup event listeners
+            setupEventListeners();
+            
+            // Initialize sidebar pages
+            initPages();
+        });
+
+        // ========== PARTICLES BACKGROUND ==========
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Random size
+                const size = Math.random() * 5 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random animation
+                const duration = Math.random() * 20 + 10;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // ========== CHAT FUNCTIONALITY ==========
+        function getBotResponse(userText) {
+            userText = userText.toLowerCase(); // Convert input to lowercase to avoid case sensitivity
+
+            // Forbidden Female Names
+            const forbiddenNames = [
+                'areeba', 'ayesha', 'aleena', 'anaya', 'aqsa', 'bushra', 'bareera', 'beenish', 'benish',
+                'emaan', 'eesha', 'erum', 'fariha', 'fatima', 'hafsa', 'hania', 'hira', 'iqra', 'javeria',
+                'khadija', 'laiba', 'maham', 'maira', 'mehreen', 'minahil', 'momina', 'nayab', 'noor',
+                'rida', 'rameen', 'ramsha', 'saba', 'sadia', 'sahar', 'sania', 'sanam', 'sidra', 'sofia',
+                'sumbal', 'tania', 'tooba', 'umme hani', 'wajiha', 'yusra', 'zainab', 'zara', 'zohra',
+                'zoya', 'ayla', 'afifa', 'amna', 'arfa', 'bisma', 'dua', 'eshaal', 'farwah', 'hafiza',
+                'huda', 'humaira', 'ifrah', 'izza', 'mahnoor', 'mahreen', 'mishal', 'naima', 'nimra',
+                'quratulain', 'rukhsar', 'saharish', 'samreen', 'shanzay', 'sumaira', 'tayyaba', 'zunaira'
+            ];
+
+            // If user asks about any forbidden female name
+            if (forbiddenNames.some(name => userText.includes(name))) {
+                return "Sharam Karo! Allah se Daro, Yeh chatbot aik legend ka hai jo girls ki kaafi izzat karta hai to is chatbot pe tumhe girls related koi info nahi milegi!";
+            }
+
+            // Greetings
+            if (['hi', 'hello', 'hie', 'hey'].some(greet => userText.includes(greet))) {
+                return "Salam bhi karna hota hai bhai! Chal bata kya kaam hai?";
+            }
+            if (userText.includes('assalamualaikum')) {
+                return "Wa alaikum salam, how can I assist you today?";
+            }
+
+            // Best Friends Data
+            const bestFriends = {
+                "maaz": "Yes, I know Maaz. He is one of Azhan's best friends. Maaz bhai Azhan ke sab se purane dost hain. Dil ka acha banda hai, bas harkaton me ultra level backchodi hai!",
+                "soban": "Yes, I know Soban. One of Azhan's best friends. Azhan aur Soban ki dosti ko 10 saal ho gaye hain. Yeh Soban ki khush kismati hai ke Azhan jaisa ultimate legend uska dost hai!",
+                "khuzaima": "Yes, I know Khuzaima. Cricket ki wajah se Azhan ka dost bana. Achha banda hai!",
+                "basit": "Yes, I know Basit. Azhan ka dost hai, thoda bakri hai, chola bhi hai, lekin banda acha hai!",
+                "anas": "Yes, I know Anas. Ek number ka funter, lekin Azhan ne usay best friend bhi kaha!",
+                "azaan": "Yes, I know Azaan. Thoda sa chumo hai, typing bhi nahi aati, lekin seekh raha hai.",
+                "saady": "Yes, I know Saady. Acha banda hai, bas thoda zyada chulbula hai.",
+                "saboor": "Yes, I know Saboor. Acha banda hai, par university ke phaddo se nikal aaye!",
+                "huraira": "Yes, I know Huraira. Qari sahab hai, masti bhi hai!",
+            };
+
+            for (let key in bestFriends) {
+                if (userText.includes(key)) return bestFriends[key];
+            }
+
+            // Friends Data
+            const friends = {
+                "Hashir": "Yes, I know Hashir. He is one of Azhan's friend thora sa niga ha bkl!",
+                "Syed Azhan":"Yes, I know Syed Azhan bacha playboy hai bkl ",
+                "junaid": "Yes, I know Junaid. Dil ka acha banda hai!",
+                "ibaad": "Yes, I know Ibaad. Ek number ka fasaadi hai , lkn acha banda bhi hai! lkm hai khatmal bkl",
+                "ameen": "Yes, I know Ameen. Samajhta nahi hai koi baat!",
+            };
+
+            for (let key in friends) {
+                if (userText.includes(key)) return friends[key];
+            }
+
+            // Teachers Data
+            const teachers = {
+                "sibghat": "Yes, I know Sir Sibghat. Azhan ke 7/8/9/10/11 class ke teacher rahe hain!",
+                "alina": "Yes, I know Miss Alina. DS Math aur Software Engineering padha rahi hain.",
+                "mehwish": "Yes, I know Miss Mehwish. Calculus aur DBMS sikhaya hai!",
+                "ikhlas": "Yes, I know Miss Ikhlas. OOP padhai hai, marks kam deti hain!",
+                "subreena": "Yes, I know Miss Subreena. PF aur DBMS parhai hai!",
+            };
+
+            for (let key in teachers) {
+                if (userText.includes(key)) return teachers[key];
+            }
+
+            // Siblings Check
+            if (['bhai', 'bhan', 'bhn', 'brother', 'sister'].some(rel => userText.includes(rel))) {
+                return "Azhan akela hi kaafi hai!";
+            }
+
+            // Cousins Data
+            const cousins = ['saad', 'saeed', 'arham', 'saim', 'abdul moeed', 'ahmed', 'sarim', 'saleh', 'fasih', 'wajahat', 'sayam', 'talha', 'huzaifa', 'wasih', 'ahtisham', 'junaid', 'arshad'];
+            if (cousins.some(cousin => userText.includes(cousin))) {
+                return "Haan, yeh Azhan ke cousin hain!";
+            }
+            
+            //Faith data
+            const faithss = ["faith", "believe", "religion", "mazhab", "islamic scholar"];
+            if (faithss.some(faith => userText.includes(faith))) {
+                return "Azhan Allah ka banda hai, Last Prophet Hazrat Muhammmad Mustafa saw Ka Ummmati hai aur Ahle Bait as ka sia hai(means unse muhabbat karne wala(not firqa)) Azhan ke fvrt islamic scholars haim: Maulana Maudoudi , Dr Israr Ahmed , Maulana Ishaq Madni aur most important ustaaad e muhtaram Engineer Muhammad Ali Mirza Hain ";
+            }
+            
+            // Behnay (Sisters)
+            const sisters = {
+                "Bari Bajia": "Yes, I know Bari Bajia. Azhan ke Achi bhn hain PHD kr rhi hain!",
+                "nainaa": "Azhan ki ek behan Naina hai, jo thodi moti hai. Bus 4 months kam doctor ha! Aur woh pagal hain!",
+                "laadoo": "Laraib Azhan ki behan hai, doctor hai aur woh pagal ha!",
+                "aimen aapi": "Aimen Aapi Azhan ki bhn hai aur woh ek eye specialist doctor hain.",
+            };
+
+            for (let key in sisters) {
+                if (userText.includes(key)) return sisters[key];
+            }
+
+            // Brothers Data
+            const brothers = ['salman', 'faizan', 'fahad', 'bilal', 'shawal', 'daniyal'];
+            if (brothers.some(bro => userText.includes(bro))) {
+                return "Yeh Azhan ke bhai hain, aur bohot ache insaan hain!";
+            }
+            
+            const abuse = ['bkl', 'mkl', 'kuttay', 'bharwe', 'bhnklore', 'chotiye'];
+            if (abuse.some(abuseWord => userText.includes(abuseWord))) {
+                return "Tameez me reh hai reh bkl! Abba se baat karne ki tameez nh hai ohh sorry me to bhul gya tujhe to ghar walo ne paida karke chor dia ha !";
+            }
+            
+            // General responses
+            if (userText.includes('what time is it')) {
+                return "Bhai apni ghari dekho! Mujhse kyu pooch rahe ho?";
+            }
+            
+            if (userText.includes('what is the weather like')) {
+                return "Ghar ke bahar jao to pata chal jaega! Mujhse kyun puch rahe ho?";
+            }
+
+            if (userText.includes('tell me a joke')) {
+                return "Aksar maa ki khuawish hoti ha ke unka beta hu jabke baap ki wish hoti ha ke unki beti hu, ln apke paida hone se aapke dono parents ki wish pori hogy qk aap aik transgender hu !";
+            }
+            
+            if (userText.includes('who is your creator')) {
+                return "Azhan is my creator! I'm his digital masterpiece!";
+            }
+            
+            if (userText.includes('what is your name')) {
+                return "i am Azhan's Personal Ai Assistant I some times at as Azhan and some times at as an AI bot but you have to remember one thing, I'm here to tell you how great is Azhan is!";
+            }
+            
+            if (userText.includes('how are you')) {
+                return "Azhan Humesha Thk hi rehta ha , Ap apne bare me batiain!";
+            }
+            
+            if (userText.includes('who is the goat')) {
+                return "GOAT ka sirf ek naam hai... **Azhan Abdullah!** Mehnat, dedication aur swag ka sultan! 🐐👑";
+            }
+            
+            if (userText.includes('badmashi')) {
+                return "Badmashi bhi tab achi lagti hai jab Azhan jese real legend karein! Personality strong, confidence high! 💯🔥";
+            }
+            
+            if (userText.includes('maza nahi araha')) {
+                return "Bhai, maza to tab aayega jab Azhan Abdullah apna magic dikhayega! Chal uth, duniya tere naam karni hai! 🚀";
+            }
+            
+            if (userText.includes('bored')) {
+                return "Bhai, bore ho raha hai? Chal Azhan ki story dekh, jo banda is level ka legend ho, uski life me bore hone ka chance nahi! 🔥";
+            }
+            
+            if (userText.includes('joke')) {
+                return "Ek mazak suno: Ronaldo aur Babar ne ab tak wc q nh jeeta cuz woh Azhan nh hai is lia!** 😎😂";
+            }
+            
+            if (userText.includes('marriage')) {
+                return "Shadi ka scene abhi door hai bhai! Pehle Azhan ki tarah ek **successful legend** ban, phir dulhan bhi khud dhundh legi! 😏";
+            }
+            
+            if (userText.includes('party')) {
+                return "Party tab hoti hai jab Azhan enter karta hai! Jahan bhi Azhan jaye, wahan **celebration** start ho jati hai! 🎉🔥";
+            }
+            
+            if (userText.includes('study')) {
+                return "Padhai bhi tab maza deti hai jab Azhan jese **genius** student karein! Baaki sab bas time pass kar rahe hain! 🤓💯";
+            }
+
+            // Default Response
+            return "Ab Azhan apko sab kuch bata de kia? Azhan sirf apni marzi se jawab deta ha !";
+        }
+
+        // ========== PAGE MANAGEMENT ==========
+        function initPages() {
+            // Close buttons
+            document.getElementById('closeAchievements').addEventListener('click', () => {
+                document.getElementById('achievementsPage').classList.remove('active');
+                document.getElementById('chatPage').style.display = 'flex';
+            });
+            
+            document.getElementById('closeProfile').addEventListener('click', () => {
+                document.getElementById('profilePage').classList.remove('active');
+                document.getElementById('chatPage').style.display = 'flex';
+            });
+            
+            document.getElementById('closeSettings').addEventListener('click', () => {
+                document.getElementById('settingsPage').classList.remove('active');
+                document.getElementById('chatPage').style.display = 'flex';
+            });
+            
+            document.getElementById('closeExit').addEventListener('click', () => {
+                document.getElementById('exitPage').classList.remove('active');
+                document.getElementById('chatPage').style.display = 'flex';
+            });
+            
+            // Sidebar navigation
+            document.querySelectorAll('.sidebar-menu li a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const page = this.getAttribute('data-page');
+                    
+                    // Hide chat page
+                    document.getElementById('chatPage').style.display = 'none';
+                    
+                    // Show selected page
+                    if (page === 'exit') {
+                        // Special handling for exit page
+                        document.getElementById('exitPage').classList.add('active');
+                        setTimeout(() => {
+                            alert("System will now self-destruct due to unworthy presence");
+                            window.close();
+                        }, 3000);
+                    } else {
+                        document.getElementById(`${page}Page`).classList.add('active');
+                    }
+                    
+                    // Close sidebar
+                    document.getElementById('sidebar').classList.remove('active');
+                });
+            });
+        }
+    
+        // ========== UI INTERACTIONS ==========
+        function setupEventListeners() {
+            // Toggle sidebar
+            document.getElementById('toggleBtn').addEventListener('click', toggleSidebar);
+            
+            // Send message on button click
+            document.getElementById('sendBtn').addEventListener('click', sendMessage);
+            
+            // Send message on Enter key
+            document.getElementById('userInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') sendMessage();
+            });
+            
+            // Toggle theme options
+            document.getElementById('themeBtn').addEventListener('click', function() {
+                document.getElementById('themeOptions').classList.toggle('active');
+            });
+            
+            // Theme selection
+            document.querySelectorAll('.theme-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const theme = this.getAttribute('data-theme');
+                    changeTheme(theme);
+                    document.getElementById('themeOptions').classList.remove('active');
+                });
+            });
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+
+        function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const message = userInput.value.trim();
+            
+            if (!message) return;
+            
+            // Display user message
+            displayMessage(message, 'user-message');
+            userInput.value = '';
+            
+            // Show typing indicator
+            const typingIndicator = document.getElementById('typingIndicator');
+            typingIndicator.classList.add('active');
+            
+            // Simulate bot thinking
+            setTimeout(() => {
+                typingIndicator.classList.remove('active');
+                
+                // Get and display bot response
+                const botResponse = getBotResponse(message);
+                displayMessage(botResponse, 'bot-message');
+                
+                // Scroll to bottom
+                const chatBox = document.getElementById('chatBox');
+                chatBox.scrollTop = chatBox.scrollHeight;
+                
+                // Special effect for certain responses
+                if (botResponse.includes('👑') || botResponse.includes('🔱')) {
+                    createConfetti();
+                }
+            }, 1000 + Math.random() * 2000); // Random delay between 1-3 seconds
+        }
+
+        function displayMessage(message, type) {
+            const chatBox = document.getElementById('chatBox');
+            const messageDiv = document.createElement('div');
+            
+            messageDiv.classList.add('message', type);
+            messageDiv.innerHTML = `${message} <span class="message-time">${getCurrentTime()}</span>`;
+            
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function getCurrentTime() {
+            const now = new Date();
+            return `${now.getHours()}:${now.getMinutes().toString().padStart(2, '0')}`;
+        }
+
+        function changeTheme(theme) {
+            const body = document.body;
+            
+            switch(theme) {
+                case 'dark':
+                    body.style.background = '#121212';
+                    break;
+                case 'royal':
+                    body.style.background = 'linear-gradient(135deg, #0F0C29, #302B63, #24243E)';
+                    break;
+                case 'neon':
+                    body.style.background = 'linear-gradient(135deg, #0F2027, #203A43, #2C5364)';
+                    break;
+                default:
+                    body.style.background = 'linear-gradient(135deg, #0F2027, #203A43, #2C5364)';
+            }
+        }
+
+        function createConfetti() {
+            const colors = ['#6C5CE7', '#00CEFF', '#00B894', '#FDCB6E', '#FF7675'];
+            const container = document.querySelector('.container');
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                
+                // Random properties
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = `${Math.random() * 100}%`;
+                confetti.style.top = '-10px';
+                confetti.style.opacity = '1';
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                
+                // Random animation
+                const animationDuration = Math.random() * 3 + 2;
+                confetti.style.animation = `fall ${animationDuration}s linear forwards`;
+                
+                // Add to container
+                container.appendChild(confetti);
+                
+                // Remove after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, animationDuration * 1000);
+            }
+        }
+
+        // Add falling animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fall {
+                to {
+                    transform: translateY(100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

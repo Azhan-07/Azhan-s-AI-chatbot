@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AZHAN |Azhan's AI Chatbot </title>
+    <title>AZHAN | Azhan's AI Chatbot </title>
     <link href="https://i.postimg.cc/NMfBkJR4/Whats-App-Image-2025-03-30-at-00-43-57-25eedeb7.jpg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -79,7 +79,7 @@
             height: 100vh;
             padding: 30px 20px;
             position: fixed;
-            left: -280px;
+            right: -280px;
             top: 0;
             z-index: 100;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -87,7 +87,7 @@
         }
 
         .sidebar.active {
-            left: 0;
+            right: 0;
         }
 
         .sidebar-header {
@@ -136,10 +136,10 @@
             font-size: 18px;
         }
 
-        /* Toggle Button */
+        /* Toggle Button - Moved to right */
         .toggle-btn {
             position: fixed;
-            left: 20px;
+            right: 20px;
             top: 20px;
             z-index: 101;
             width: 40px;
@@ -200,10 +200,9 @@
             font-size: 24px;
             font-weight: 700;
             background: linear-gradient(to right, var(--primary), var(--secondary));
-            background-clip: text;
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-color: transparent;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
         }
 
         .chat-status {
@@ -414,21 +413,25 @@ color: transparent;
             margin-bottom: 30px;
         }
         .page-header h2 {
-    font-size: 28px;
-    background: linear-gradient(to right, var(--primary), var(--secondary));
-    background-clip: text; /* Standard property */
-    -webkit-background-clip: text; /* Vendor prefix */
-    -webkit-text-fill-color: transparent;
-    color: transparent; /* Fallback */
-}
+            font-size: 28px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
 
-.close-page {
-    background: var(--danger);
-    color: white;
-    border: none;
-    width: 40px;
-    height: 40px;
-}
+        .close-page {
+            background: var(--danger);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
 
         .achievement-container {
             text-align: center;
@@ -439,26 +442,16 @@ color: transparent;
             max-width: 100%;
             border-radius: 15px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Removed the □ character */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .achievement-container h1 {
-    font-size: 42px;  /* Changed from 420x to 42px */
-    margin-bottom: 20px;
-    background: linear-gradient(to right, #ff8a00, #e52e71);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.achievement-container h1 {
-    font-size: 42px;
-    margin-bottom: 20px;
-    background: linear-gradient(to right, #ff8a00, #e52e71);
-    background-clip: text; /* Standard property */
-    -webkit-background-clip: text; /* Vendor prefix */
-    -webkit-text-fill-color: transparent;
-    color: transparent; /* Fallback */
-}
+            font-size: 42px;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #ff8a00, #e52e71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
         .profile-container {
             display: flex;
@@ -524,10 +517,42 @@ color: transparent;
             
             .message {
                 max-width: 85%;
+                font-size: 14px;
+                padding: 12px;
             }
-
+            
+            .chat-title h1 {
+                font-size: 20px;
+            }
+            
+            .chat-title img {
+                width: 40px;
+                height: 40px;
+            }
+            
             .achievement-container h1 {
-                font-size: 32px;
+                font-size: 28px;
+            }
+            
+            .profile-image {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .profile-text {
+                padding: 20px;
+                font-size: 14px;
+            }
+            
+            .chat-input {
+                padding: 12px 15px;
+                font-size: 14px;
+            }
+            
+            .send-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 14px;
             }
         }
 
@@ -540,11 +565,11 @@ color: transparent;
             opacity: 0;
         }
 
-        /* Theme Switcher */
+        /* Theme Switcher - Moved to left */
         .theme-switcher {
             position: fixed;
             bottom: 30px;
-            right: 30px;
+            left: 30px;
             z-index: 99;
         }
 
@@ -571,7 +596,7 @@ color: transparent;
         .theme-options {
             position: absolute;
             bottom: 60px;
-            right: 0;
+            left: 0;
             background: rgba(45, 52, 54, 0.9);
             border-radius: 15px;
             padding: 10px;
@@ -753,7 +778,7 @@ color: transparent;
         </div>
     </div>
 
-    <!-- Theme Switcher -->
+    <!-- Theme Switcher - Now on left side -->
     <div class="theme-switcher">
         <button class="theme-btn glass" id="themeBtn">
             <i class="fas fa-palette"></i>
@@ -791,36 +816,9 @@ color: transparent;
             initPages();
         });
 
-        // ========== PARTICLES BACKGROUND ==========
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 50;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                // Random position
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                
-                // Random size
-                const size = Math.random() * 5 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                
-                // Random animation
-                const duration = Math.random() * 20 + 10;
-                particle.style.animationDuration = `${duration}s`;
-                particle.style.animationDelay = `${Math.random() * 5}s`;
-                
-                particlesContainer.appendChild(particle);
-            }
-        }
-
         // ========== CHAT FUNCTIONALITY ==========
         function getBotResponse(userText) {
-            userText = userText.toLowerCase(); // Convert input to lowercase to avoid case sensitivity
+            userText = userText.toLowerCase(); // Convert to lowercase to handle case insensitivity
 
             // Forbidden Female Names
             const forbiddenNames = [
@@ -833,18 +831,17 @@ color: transparent;
                 'huda', 'humaira', 'ifrah', 'izza', 'mahnoor', 'mahreen', 'mishal', 'naima', 'nimra',
                 'quratulain', 'rukhsar', 'saharish', 'samreen', 'shanzay', 'sumaira', 'tayyaba', 'zunaira'
             ];
-
-            // If user asks about any forbidden female name
+            
             if (forbiddenNames.some(name => userText.includes(name))) {
                 return "Sharam Karo! Allah se Daro, Yeh chatbot aik legend ka hai jo girls ki kaafi izzat karta hai to is chatbot pe tumhe girls related koi info nahi milegi!";
             }
 
-            // Greetings
-            if (['hi', 'hello', 'hie', 'hey'].some(greet => userText.includes(greet))) {
-                return "Salam bhi karna hota hai bhai! Chal bata kya kaam hai?";
-            }
-            if (userText.includes('assalamualaikum')) {
-                return "Wa alaikum salam, how can I assist you today?";
+            // Generalized function to match any topic-related word in user input
+            function getMatchingResponse(dictionary) {
+                for (let key in dictionary) {
+                    if (userText.includes(key)) return dictionary[key];
+                }
+                return null;
             }
 
             // Best Friends Data
@@ -853,29 +850,27 @@ color: transparent;
                 "soban": "Yes, I know Soban. One of Azhan's best friends. Azhan aur Soban ki dosti ko 10 saal ho gaye hain. Yeh Soban ki khush kismati hai ke Azhan jaisa ultimate legend uska dost hai!",
                 "khuzaima": "Yes, I know Khuzaima. Cricket ki wajah se Azhan ka dost bana. Achha banda hai!",
                 "basit": "Yes, I know Basit. Azhan ka dost hai, thoda bakri hai, chola bhi hai, lekin banda acha hai!",
-                "anas": "Yes, I know Anas. Ek number ka funter, lekin Azhan ne usay best friend bhi kaha!",
+                "anas": "Yes, I know Anas. Ek number ka ultra harami banda ha , lekin Azhan ne usay best friend bhi kaha!",
                 "azaan": "Yes, I know Azaan. Thoda sa chumo hai, typing bhi nahi aati, lekin seekh raha hai.",
                 "saady": "Yes, I know Saady. Acha banda hai, bas thoda zyada chulbula hai.",
                 "saboor": "Yes, I know Saboor. Acha banda hai, par university ke phaddo se nikal aaye!",
-                "huraira": "Yes, I know Huraira. Qari sahab hai, masti bhi hai!",
+                "huraira": "Yes, I know Huraira. Qari sahab hai, masti bhi bhut hai usme!"
             };
 
-            for (let key in bestFriends) {
-                if (userText.includes(key)) return bestFriends[key];
-            }
+            let response = getMatchingResponse(bestFriends);
+            if (response) return response;
 
             // Friends Data
             const friends = {
-                "Hashir": "Yes, I know Hashir. He is one of Azhan's friend thora sa niga ha bkl!",
-                "Syed Azhan":"Yes, I know Syed Azhan bacha playboy hai bkl ",
+                "hashir": "Yes, I know Hashir. He is one of Azhan's friend thora sa nigga ha bkl!",
+                "syed azhan": "Yes, I know Syed Azhan! bacha playboy hai bkl",
                 "junaid": "Yes, I know Junaid. Dil ka acha banda hai!",
-                "ibaad": "Yes, I know Ibaad. Ek number ka fasaadi hai , lkn acha banda bhi hai! lkm hai khatmal bkl",
-                "ameen": "Yes, I know Ameen. Samajhta nahi hai koi baat!",
+                "ibaad": "Yes, I know Ibaad. Ek number ka fasaadi hai, lkn acha banda bhi hai! lkn hai khatmal bkl",
+                "ameen": "Yes, I know Ameen. Samajhta nahi hai koi baat! bhut bara chutya ha lkn aaj kal chehray pe noor hai"
             };
 
-            for (let key in friends) {
-                if (userText.includes(key)) return friends[key];
-            }
+            response = getMatchingResponse(friends);
+            if (response) return response;
 
             // Teachers Data
             const teachers = {
@@ -883,51 +878,45 @@ color: transparent;
                 "alina": "Yes, I know Miss Alina. DS Math aur Software Engineering padha rahi hain.",
                 "mehwish": "Yes, I know Miss Mehwish. Calculus aur DBMS sikhaya hai!",
                 "ikhlas": "Yes, I know Miss Ikhlas. OOP padhai hai, marks kam deti hain!",
-                "subreena": "Yes, I know Miss Subreena. PF aur DBMS parhai hai!",
+                "subreena": "Yes, I know Miss Subreena. PF aur DBMS parhai hai!"
             };
 
-            for (let key in teachers) {
-                if (userText.includes(key)) return teachers[key];
-            }
-
-            // Siblings Check
-            if (['bhai', 'bhan', 'bhn', 'brother', 'sister'].some(rel => userText.includes(rel))) {
-                return "Azhan akela hi kaafi hai!";
-            }
+            response = getMatchingResponse(teachers);
+            if (response) return response;
 
             // Cousins Data
             const cousins = ['saad', 'saeed', 'arham', 'saim', 'abdul moeed', 'ahmed', 'sarim', 'saleh', 'fasih', 'wajahat', 'sayam', 'talha', 'huzaifa', 'wasih', 'ahtisham', 'junaid', 'arshad'];
             if (cousins.some(cousin => userText.includes(cousin))) {
                 return "Haan, yeh Azhan ke cousin hain!";
             }
-            
-            //Faith data
-            const faithss = ["faith", "believe", "religion", "mazhab", "islamic scholar"];
-            if (faithss.some(faith => userText.includes(faith))) {
-                return "Azhan Allah ka banda hai, Last Prophet Hazrat Muhammmad Mustafa saw Ka Ummmati hai aur Ahle Bait as ka sia hai(means unse muhabbat karne wala(not firqa)) Azhan ke fvrt islamic scholars haim: Maulana Maudoudi , Dr Israr Ahmed , Maulana Ishaq Madni aur most important ustaaad e muhtaram Engineer Muhammad Ali Mirza Hain ";
+
+            // Faith Data
+            const faithWords = ["faith", "believe", "religion", "firqa", "mazhab", "islamic scholar"];
+            if (faithWords.some(faith => userText.includes(faith))) {
+                return "Azhan Allah ka Banda hai, Last Prophet Hazrat Muhammmad Mustafa saw Ka Ummmati hai aur Ahle Bait as ka Shia hai(means unse muhabbat karne wala(not firqa)) Azhan ke fvrt islamic scholars hain: Maulana Maudoudi, Dr Israr Ahmed, Maulana Ishaq Madni aur most important ustaaad e muhtaram Engineer Muhammad Ali Mirza.";
             }
-            
-            // Behnay (Sisters)
+
+            // Sisters Data
             const sisters = {
-                "Bari Bajia": "Yes, I know Bari Bajia. Azhan ke Achi bhn hain PHD kr rhi hain!",
+                "bari bajia": "Yes, I know Bari Bajia. Azhan ke Achi bhn hain PHD holder hain!",
                 "nainaa": "Azhan ki ek behan Naina hai, jo thodi moti hai. Bus 4 months kam doctor ha! Aur woh pagal hain!",
                 "laadoo": "Laraib Azhan ki behan hai, doctor hai aur woh pagal ha!",
-                "aimen aapi": "Aimen Aapi Azhan ki bhn hai aur woh ek eye specialist doctor hain.",
+                "aimen aapi": "Aimen Aapi Azhan ki bhn hai aur woh ek eye specialist doctor hain."
             };
 
-            for (let key in sisters) {
-                if (userText.includes(key)) return sisters[key];
-            }
+            response = getMatchingResponse(sisters);
+            if (response) return response;
 
             // Brothers Data
             const brothers = ['salman', 'faizan', 'fahad', 'bilal', 'shawal', 'daniyal'];
             if (brothers.some(bro => userText.includes(bro))) {
                 return "Yeh Azhan ke bhai hain, aur bohot ache insaan hain!";
             }
-            
-            const abuse = ['bkl', 'mkl', 'kuttay', 'bharwe', 'bhnklore', 'chotiye'];
-            if (abuse.some(abuseWord => userText.includes(abuseWord))) {
-                return "Tameez me reh hai reh bkl! Abba se baat karne ki tameez nh hai ohh sorry me to bhul gya tujhe to ghar walo ne paida karke chor dia ha !";
+
+            // Abusive Language Check
+            const abuseWords = ['bkl', 'mkl', 'kuttay', 'bharwe', 'bhnklore', 'chotiye'];
+            if (abuseWords.some(abuseWord => userText.includes(abuseWord))) {
+                return "Tameez me reh le bkl! Abba se baat karne ki tameez nh hai ohh sorry tere ghar waloo n eto tujhe paida karke chor dia ha";
             }
             
             // General responses
@@ -940,7 +929,7 @@ color: transparent;
             }
 
             if (userText.includes('tell me a joke')) {
-                return "Aksar maa ki khuawish hoti ha ke unka beta hu jabke baap ki wish hoti ha ke unki beti hu, ln apke paida hone se aapke dono parents ki wish pori hogy qk aap aik transgender hu !";
+                return "Aksar maa ki khuawish hoti ha ke unka beta hu jabke baap ki wish hoti ha ke unki beti hu, lkn apke paida hone se aapke dono parents ki wish pori hogy qk aap aik transgender hu!";
             }
             
             if (userText.includes('who is your creator')) {
@@ -948,11 +937,11 @@ color: transparent;
             }
             
             if (userText.includes('what is your name')) {
-                return "i am Azhan's Personal Ai Assistant I some times at as Azhan and some times at as an AI bot but you have to remember one thing, I'm here to tell you how great is Azhan is!";
+                return "i am Azhan's Personal Ai Assistant I some times at as Azhan and some times at as an AI bot but you have to remember one thing, I'm here to tell you how great Azhan is!";
             }
             
             if (userText.includes('how are you')) {
-                return "Azhan Humesha Thk hi rehta ha , Ap apne bare me batiain!";
+                return "Azhan Humesha Thk hi rehta ha, Ap apne bare me batiain!";
             }
             
             if (userText.includes('who is the goat')) {
@@ -988,7 +977,7 @@ color: transparent;
             }
 
             // Default Response
-            return "Ab Azhan apko sab kuch bata de kia? Azhan sirf apni marzi se jawab deta ha !";
+            return "Ya to Azhan apka sawal hi nh samjha ya phir Azhan aapko jawab nh dena chahta dono conditions me apko is sawal ka jawab to nh milne laga!";
         }
 
         // ========== PAGE MANAGEMENT ==========
@@ -1137,6 +1126,27 @@ color: transparent;
                     break;
                 default:
                     body.style.background = 'linear-gradient(135deg, #0F2027, #203A43, #2C5364)';
+            }
+        }
+
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random properties
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.width = `${Math.random() * 5 + 2}px`;
+                particle.style.height = particle.style.width;
+                particle.style.opacity = Math.random();
+                particle.style.animationDuration = `${Math.random() * 10 + 5}s`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                particlesContainer.appendChild(particle);
             }
         }
 

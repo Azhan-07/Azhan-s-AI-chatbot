@@ -29,6 +29,7 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
+            transition: all 0.5s ease;
         }
 
         /* Glass Morphism Effect */
@@ -39,6 +40,7 @@
             border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            transition: all 0.3s ease;
         }
 
         /* Floating Particles Background */
@@ -105,6 +107,11 @@
             margin-right: 10px;
             object-fit: cover;
             border: 2px solid var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-header img:hover {
+            transform: rotate(15deg) scale(1.1);
         }
 
         .sidebar-menu {
@@ -129,6 +136,7 @@
         .sidebar-menu li a:hover, .sidebar-menu li a.active {
             background: rgba(108, 92, 231, 0.2);
             color: var(--secondary);
+            transform: translateX(5px);
         }
 
         .sidebar-menu li a i {
@@ -153,13 +161,17 @@
             justify-content: center;
             cursor: pointer;
             font-size: 20px;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
         }
 
         .toggle-btn:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(90deg);
             box-shadow: 0 6px 20px rgba(108, 92, 231, 0.4);
+        }
+
+        .toggle-btn.moved {
+            right: calc(280px + 20px);
         }
 
         /* Chat Container - Premium Design */
@@ -194,6 +206,11 @@
             margin-right: 15px;
             object-fit: cover;
             border: 3px solid var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .chat-title img:hover {
+            transform: rotate(10deg) scale(1.1);
         }
 
         .chat-title h1 {
@@ -203,6 +220,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             color: transparent;
+            transition: all 0.3s ease;
         }
 
         .chat-status {
@@ -321,6 +339,7 @@
         .chat-input:focus {
             background: rgba(255, 255, 255, 0.15);
             box-shadow: 0 0 0 2px var(--primary);
+            transform: scale(1.01);
         }
 
         .send-btn {
@@ -338,12 +357,12 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .send-btn:hover {
             background: var(--secondary);
-            transform: translateY(-50%) scale(1.1);
+            transform: translateY(-50%) scale(1.1) rotate(20deg);
         }
 
         /* Typing Indicator */
@@ -400,6 +419,12 @@
             overflow-y: auto;
             display: none;
             z-index: 90;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .page-content.active {
@@ -411,7 +436,14 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
+            animation: slideDown 0.5s ease;
         }
+
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
         .page-header h2 {
             font-size: 28px;
             background: linear-gradient(to right, var(--primary), var(--secondary));
@@ -431,11 +463,26 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 110;
+            position: fixed;
+            right: 20px;
+            top: 20px;
+        }
+
+        .close-page:hover {
+            transform: rotate(90deg) scale(1.1);
         }
 
         .achievement-container {
             text-align: center;
             padding: 30px;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .achievement-container img {
@@ -443,6 +490,11 @@
             border-radius: 15px;
             margin-bottom: 30px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .achievement-container img:hover {
+            transform: scale(1.02);
         }
 
         .achievement-container h1 {
@@ -458,6 +510,7 @@
             flex-direction: column;
             align-items: center;
             padding: 30px;
+            animation: fadeInUp 0.6s ease;
         }
 
         .profile-image {
@@ -468,6 +521,11 @@
             border: 5px solid var(--primary);
             margin-bottom: 30px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-image:hover {
+            transform: rotate(5deg) scale(1.05);
         }
 
         .profile-text {
@@ -477,11 +535,17 @@
             border-radius: 15px;
             line-height: 1.8;
             font-size: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-text:hover {
+            transform: translateY(-5px);
         }
 
         .settings-container {
             text-align: center;
             padding: 30px;
+            animation: fadeInUp 0.6s ease;
         }
 
         .settings-container img {
@@ -490,6 +554,11 @@
             margin: 30px auto;
             display: block;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .settings-container img:hover {
+            transform: scale(1.05);
         }
 
         .exit-container {
@@ -500,12 +569,14 @@
             height: 100%;
             padding: 30px;
             text-align: center;
+            animation: fadeInUp 0.6s ease;
         }
 
         .exit-container h1 {
             font-size: 42px;
             margin-bottom: 30px;
             color: var(--danger);
+            animation: pulse 2s infinite;
         }
 
         /* Responsive Design */
@@ -554,6 +625,69 @@
                 height: 36px;
                 font-size: 14px;
             }
+
+            /* Mobile-specific fixes */
+            .toggle-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 16px;
+            }
+            
+            .chat-status {
+                font-size: 12px;
+                position: absolute;
+                right: 60px;
+                top: 30px;
+            }
+            
+            .chat-status .indicator {
+                width: 8px;
+                height: 8px;
+            }
+            
+            .close-page {
+                right: 15px;
+                top: 15px;
+                width: 30px;
+                height: 30px;
+                font-size: 14px;
+            }
+
+            /* Make sidebar full height and width */
+            .sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .sidebar.active {
+                right: 0;
+            }
+            
+            /* Adjust toggle button position when sidebar is open */
+            .toggle-btn.moved {
+                right: calc(100% - 50px);
+            }
+            
+            /* Adjust chat header layout */
+            .chat-header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding-bottom: 40px; /* Make space for status */
+            }
+            
+            .chat-title {
+                margin-bottom: 10px;
+            }
+            
+            /* Make messages slightly wider on mobile */
+            .message {
+                max-width: 85%;
+            }
+
+            body {
+                overflow-x: hidden;
+                position: relative;
+            }
         }
 
         /* Special Effects */
@@ -565,44 +699,14 @@
             opacity: 0;
         }
 
-        /* Theme Switcher - Moved to left */
-        .theme-switcher {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            z-index: 99;
-        }
-
-        .theme-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--primary);
-            color: white;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s;
-        }
-
-        .theme-btn:hover {
-            transform: rotate(180deg) scale(1.1);
-        }
-
+        /* Theme Options in Sidebar */
         .theme-options {
-            position: absolute;
-            bottom: 60px;
-            left: 0;
-            background: rgba(45, 52, 54, 0.9);
-            border-radius: 15px;
-            padding: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             display: none;
             flex-direction: column;
-            min-width: 150px;
+            animation: fadeIn 0.5s ease;
         }
 
         .theme-options.active {
@@ -621,6 +725,7 @@
 
         .theme-option:hover {
             background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
         }
 
         .theme-color {
@@ -629,6 +734,39 @@
             border-radius: 50%;
             margin-right: 10px;
             border: 2px solid white;
+        }
+
+        /* Theme Toggle in Sidebar */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            color: var(--light);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(108, 92, 231, 0.2);
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .theme-toggle i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        /* Bounce animation for toggle button */
+        @keyframes bounce {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-10px); }
+        }
+
+        .bounce {
+            animation: bounce 0.5s ease;
         }
     </style>
 </head>
@@ -652,7 +790,30 @@
             <li><a href="#" data-page="achievements"><i class="fas fa-crown"></i> Achievements</a></li>
             <li><a href="#" data-page="settings"><i class="fas fa-cog"></i> Settings</a></li>
             <li><a href="#" data-page="exit"><i class="fas fa-sign-out-alt"></i> Exit</a></li>
+            <li class="theme-toggle" id="themeToggle">
+                <i class="fas fa-palette"></i> Themes
+            </li>
         </ul>
+        
+        <!-- Theme Options -->
+        <div class="theme-options glass" id="themeOptions">
+            <div class="theme-option" data-theme="default">
+                <div class="theme-color" style="background: linear-gradient(135deg, #6C5CE7, #00CEFF);"></div>
+                <span>Default</span>
+            </div>
+            <div class="theme-option" data-theme="dark">
+                <div class="theme-color" style="background: #2D3436;"></div>
+                <span>Dark</span>
+            </div>
+            <div class="theme-option" data-theme="royal">
+                <div class="theme-color" style="background: linear-gradient(135deg, #FFD700, #C0C0C0);"></div>
+                <span>Royal</span>
+            </div>
+            <div class="theme-option" data-theme="neon">
+                <div class="theme-color" style="background: linear-gradient(135deg, #FF00FF, #00FFFF);"></div>
+                <span>Neon</span>
+            </div>
+        </div>
     </div>
 
     <!-- Main Chat Container -->
@@ -700,14 +861,14 @@
         </div>
         <div class="achievement-container">
             <img src="https://i.postimg.cc/SsXLq3QT/Whats-App-Image-2025-03-29-at-13-39-03-6b1ada57.jpg" alt="Azhan's Achievement">
-            <h1>AZHAN'S Achievements</h1>
+            <h1>Azhan'S Achievements</h1>
             <p>
                 "On the day Azhan Abdullah was born, it was by the will of Allah that a new soul entered this world, destined for greatness. His existence is a blessing, a testament to the wisdom and mercy of the Almighty
                 From skipping grades effortlessly to dominating every field he touches, Azhan redefines perfection. 
                 Azhan Abdullah is blessed with remarkable talents and achievements that inspire many. His dedication and hard work set a high standard, serving as a source of motivation for those who strive for excellence. Truly, all greatness belongs to Allah alone, who grants success to whom He wills.
             </p>
             <p>
-                <strong>Fun Fact:</strong> The term "genius" was coined the day Azhan solved complex mathematical problems while still in the womb.
+                <strong>Fun Fact:</strong> The term "genius" was coined by Azhan Abdullah himself, as he was the first to ever use it in a conversation.
             </p>
         </div>
     </div>
@@ -743,19 +904,19 @@
     <!-- Settings Page -->
     <div class="page-content glass" id="settingsPage">
         <div class="page-header">
-            <h2>SETTINGS (FOR INFERIOR BEINGS)</h2>
+            <h2>SETTINGS</h2>
             <button class="close-page" id="closeSettings"><i class="fas fa-times"></i></button>
         </div>
         <div class="settings-container">
-            <h1>JAAKE ILAJ KARAO APNE DIMAGH KA</h1>
-            <p>Before attempting to adjust any settings, please ensure:</p>
+            <h1>"Azhan has crafted this to perfection—no adjustments necessary."</h1>
+            <p>Before considering any modifications, please ensure the following:</p>
             <ul style="list-style: none; margin: 20px 0;">
-                <li>➤ Your IQ is at least half of Azhan's (good luck with that)</li>
-                <li>➤ You've signed a waiver accepting your inferiority</li>
-                <li>➤ You're seated to prevent injury from the sheer brilliance</li>
+                <li>➤ You possess the required expertise to match Azhan's precision.</li>
+                <li>➤ You acknowledge the system's flawless optimization.</li>
+                <li>➤ You are prepared to witness unparalleled efficiency.</li>
             </ul>
             <img src="https://i.postimg.cc/c1XDmBqJ/360-F-602800824-BPgd79z-Tx-Nyj-Q3-Eaucx-Bm-Rf-V59-Haq-V3q.jpg" alt="Warning" style="max-width: 300px;">
-            <p><em>Note: No actual settings can be changed here. Azhan's excellence is already fine-tuned to near perfection—just the way it was meant to be!.</em></p>
+            <p><em>Note: No further adjustments are required. This system has been meticulously refined for optimal performance.</em></p>
         </div>
     </div>
 
@@ -766,40 +927,15 @@
             <button class="close-page" id="closeExit"><i class="fas fa-times"></i></button>
         </div>
         <div class="exit-container">
-            <h1>Umeed Hai Aap Ne Azhan se kuch na kuh Seekha hi hoga</h1>
+            <h1>We Hope You've Gained Valuable Insights from Azhan</h1>
             <p style="font-size: 24px; margin-bottom: 30px;">
-                This terminal has recorded your unworthy presence. <br>
-                If you want to learn from the great Azhan, restart your browser.
+                Your interaction has been noted. <br>
+                If you wish to further enhance your knowledge with Azhan's expertise, please restart your browser.
             </p>
             <img src="https://i.postimg.cc/c1XDmBqJ/360-F-602800824-BPgd79z-Tx-Nyj-Q3-Eaucx-Bm-Rf-V59-Haq-V3q.jpg" alt="Exit" style="max-width: 200px; border-radius: 50%;">
             <p style="margin-top: 30px; font-size: 18px;">
-                <strong>Warning:</strong> Next violation will result in permanent banishment to the shadow realm.
+                <strong>Note:</strong> Repeated violations may result in restricted access.
             </p>
-        </div>
-    </div>
-
-    <!-- Theme Switcher - Now on left side -->
-    <div class="theme-switcher">
-        <button class="theme-btn glass" id="themeBtn">
-            <i class="fas fa-palette"></i>
-        </button>
-        <div class="theme-options glass" id="themeOptions">
-            <div class="theme-option" data-theme="default">
-                <div class="theme-color" style="background: linear-gradient(135deg, #6C5CE7, #00CEFF);"></div>
-                <span>Default</span>
-            </div>
-            <div class="theme-option" data-theme="dark">
-                <div class="theme-color" style="background: #2D3436;"></div>
-                <span>Dark</span>
-            </div>
-            <div class="theme-option" data-theme="royal">
-                <div class="theme-color" style="background: linear-gradient(135deg, #FFD700, #C0C0C0);"></div>
-                <span>Royal</span>
-            </div>
-            <div class="theme-option" data-theme="neon">
-                <div class="theme-color" style="background: linear-gradient(135deg, #FF00FF, #00FFFF);"></div>
-                <span>Neon</span>
-            </div>
         </div>
     </div>
 
@@ -848,7 +984,7 @@
             const bestFriends = {
                 "maaz": "Yes, I know Maaz. He is one of Azhan's best friends. Maaz bhai Azhan ke sab se purane dost hain. Dil ka acha banda hai, bas harkaton me ultra level backchodi hai!",
                 "soban": "Yes, I know Soban. One of Azhan's best friends. Azhan aur Soban ki dosti ko 10 saal ho gaye hain. Yeh Soban ki khush kismati hai ke Azhan jaisa ultimate legend uska dost hai!",
-                "khuzaima": "Yes, I know Khuzaima. Cricket ki wajah se Azhan ka dost bana. Achha banda hai!",
+                "khuzaima": "Yes, I know Khuzaima. Cricket ki wajah se Azhan ka dost bana. Achha banda hai!,Thora sa bkl ha",
                 "basit": "Yes, I know Basit. Azhan ka dost hai, thoda bakri hai, chola bhi hai, lekin banda acha hai!",
                 "anas": "Yes, I know Anas. Ek number ka ultra harami banda ha , lekin Azhan ne usay best friend bhi kaha!",
                 "azaan": "Yes, I know Azaan. Thoda sa chumo hai, typing bhi nahi aati, lekin seekh raha hai.",
@@ -863,6 +999,7 @@
             // Friends Data
             const friends = {
                 "hashir": "Yes, I know Hashir. He is one of Azhan's friend thora sa nigga ha bkl!",
+                "Mosa" : "Yes, I know Mosa. Azan ka dost ha jharoo ki tarah patla ha lkn dil ka acha banda ha",
                 "syed azhan": "Yes, I know Syed Azhan! bacha playboy hai bkl",
                 "junaid": "Yes, I know Junaid. Dil ka acha banda hai!",
                 "ibaad": "Yes, I know Ibaad. Ek number ka fasaadi hai, lkn acha banda bhi hai! lkn hai khatmal bkl",
@@ -986,21 +1123,25 @@
             document.getElementById('closeAchievements').addEventListener('click', () => {
                 document.getElementById('achievementsPage').classList.remove('active');
                 document.getElementById('chatPage').style.display = 'flex';
+                moveToggleButton();
             });
             
             document.getElementById('closeProfile').addEventListener('click', () => {
                 document.getElementById('profilePage').classList.remove('active');
                 document.getElementById('chatPage').style.display = 'flex';
+                moveToggleButton();
             });
             
             document.getElementById('closeSettings').addEventListener('click', () => {
                 document.getElementById('settingsPage').classList.remove('active');
                 document.getElementById('chatPage').style.display = 'flex';
+                moveToggleButton();
             });
             
             document.getElementById('closeExit').addEventListener('click', () => {
                 document.getElementById('exitPage').classList.remove('active');
                 document.getElementById('chatPage').style.display = 'flex';
+                moveToggleButton();
             });
             
             // Sidebar navigation
@@ -1009,25 +1150,51 @@
                     e.preventDefault();
                     const page = this.getAttribute('data-page');
                     
+                    // Hide all pages first
+                    document.querySelectorAll('.page-content').forEach(page => {
+                        page.classList.remove('active');
+                    });
+                    
                     // Hide chat page
                     document.getElementById('chatPage').style.display = 'none';
                     
                     // Show selected page
                     if (page === 'exit') {
-                        // Special handling for exit page
                         document.getElementById('exitPage').classList.add('active');
                         setTimeout(() => {
                             alert("System will now self-destruct due to unworthy presence");
                             window.close();
                         }, 3000);
+                    } else if (page === 'chat') {
+                        document.getElementById('chatPage').style.display = 'flex';
                     } else {
                         document.getElementById(`${page}Page`).classList.add('active');
                     }
                     
                     // Close sidebar
                     document.getElementById('sidebar').classList.remove('active');
+                    
+                    // Move toggle button
+                    moveToggleButton();
                 });
             });
+            
+            // Theme toggle in sidebar
+            document.getElementById('themeToggle').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('themeOptions').classList.toggle('active');
+            });
+        }
+        
+        function moveToggleButton() {
+            const toggleBtn = document.getElementById('toggleBtn');
+            toggleBtn.classList.toggle('moved');
+            toggleBtn.classList.add('bounce');
+            
+            // Remove bounce class after animation completes
+            setTimeout(() => {
+                toggleBtn.classList.remove('bounce');
+            }, 500);
         }
     
         // ========== UI INTERACTIONS ==========
@@ -1043,23 +1210,30 @@
                 if (e.key === 'Enter') sendMessage();
             });
             
-            // Toggle theme options
-            document.getElementById('themeBtn').addEventListener('click', function() {
-                document.getElementById('themeOptions').classList.toggle('active');
-            });
-            
             // Theme selection
             document.querySelectorAll('.theme-option').forEach(option => {
                 option.addEventListener('click', function() {
                     const theme = this.getAttribute('data-theme');
                     changeTheme(theme);
                     document.getElementById('themeOptions').classList.remove('active');
+                    
+                    // Add animation to theme change
+                    document.body.style.animation = 'fadeIn 0.5s ease';
+                    setTimeout(() => {
+                        document.body.style.animation = '';
+                    }, 500);
                 });
             });
         }
 
         function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('active');
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+            
+            // Toggle body scroll
+            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+            
+            moveToggleButton();
         }
 
         function sendMessage() {
@@ -1071,6 +1245,13 @@
             // Display user message
             displayMessage(message, 'user-message');
             userInput.value = '';
+            
+            // Add animation to send button
+            const sendBtn = document.getElementById('sendBtn');
+            sendBtn.style.transform = 'translateY(-50%) scale(1.2)';
+            setTimeout(() => {
+                sendBtn.style.transform = 'translateY(-50%)';
+            }, 300);
             
             // Show typing indicator
             const typingIndicator = document.getElementById('typingIndicator');
@@ -1104,6 +1285,9 @@
             
             chatBox.appendChild(messageDiv);
             chatBox.scrollTop = chatBox.scrollHeight;
+            
+            // Add animation to new messages
+            messageDiv.style.animation = 'messageIn 0.4s forwards';
         }
 
         function getCurrentTime() {
@@ -1117,15 +1301,23 @@
             switch(theme) {
                 case 'dark':
                     body.style.background = '#121212';
+                    document.documentElement.style.setProperty('--primary', '#2D3436');
+                    document.documentElement.style.setProperty('--secondary', '#636E72');
                     break;
                 case 'royal':
                     body.style.background = 'linear-gradient(135deg, #0F0C29, #302B63, #24243E)';
+                    document.documentElement.style.setProperty('--primary', '#FFD700');
+                    document.documentElement.style.setProperty('--secondary', '#C0C0C0');
                     break;
                 case 'neon':
                     body.style.background = 'linear-gradient(135deg, #0F2027, #203A43, #2C5364)';
+                    document.documentElement.style.setProperty('--primary', '#FF00FF');
+                    document.documentElement.style.setProperty('--secondary', '#00FFFF');
                     break;
                 default:
                     body.style.background = 'linear-gradient(135deg, #0F2027, #203A43, #2C5364)';
+                    document.documentElement.style.setProperty('--primary', '#6C5CE7');
+                    document.documentElement.style.setProperty('--secondary', '#00CEFF');
             }
         }
 

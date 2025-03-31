@@ -578,7 +578,41 @@
             color: var(--danger);
             animation: pulse 2s infinite;
         }
-
+        @media (max-width: 768px) {
+    /* ... (keep all other existing mobile styles) ... */
+    
+    /* Move chat status to bottom near input */
+    .chat-status {
+        position: fixed;
+        bottom: 80px; /* Position above the input */
+        right: 20px;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        z-index: 10;
+        animation: pulse 2s infinite;
+    }
+    
+    .chat-status .indicator {
+        margin-right: 5px;
+    }
+    
+    /* Adjust chat header to remove status from top */
+    .chat-header {
+        padding-bottom: 20px;
+    }
+    
+    /* Make sure input container has enough space */
+    .chat-input-container {
+        margin-bottom: 30px;
+    }
+}
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 184, 148, 0.7); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(0, 184, 148, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 184, 148, 0); }
+}
         /* Responsive Design */
         @media (max-width: 768px) {
             .chat-container {
